@@ -27,5 +27,9 @@ def quit(message=None):
     put_line('QUIT ' + (message or ''))
 
 
+def nick(nick):
+    put_line('NICK ' + nick)
+
+
 def me(target, action):
     privmsg(target, chr(1) + 'ACTION ' + action + chr(1))
