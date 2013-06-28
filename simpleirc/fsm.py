@@ -23,7 +23,20 @@ from simpleirc.parser import parse_line
 
 
 def zero_state(state):
-    return _register(state, _take_line)
+    '''
+    Bootstraps the state machine by kicking off the initial state, i.e.
+    `_register`.
+
+    States are defined as generators which yield generators. The yielded
+    generator is considered the next state. This function is responsible for
+    consuming the generator states by calling ``next`` over them, successively.
+    The current state is bound to a variable `s` which is passed to ``next``
+    and in tandem the return value of this call is bound to `s`, this
+    process is then repeated indefinitely.
+    '''
+    s = _register(state.copy(), _take_line)
+    while True:
+        s = next(s)
 
 
 # States
@@ -32,14 +45,14 @@ def zero_state(state):
 def _register(state, next_state):
     put_line('NICK ' + state['nick'])
     put_line('USER ' + state['nick'] + ' 0 * :' + state['realname'])
-    return next_state(state, _apply_callbacks)
+    yield next_state(state, _apply_callbacks)
 
 
 # take_line -> apply_callbacks
 def _take_line(_, next_state):
     from simpleirc.connection import _get_irc_state
-    return next_state(parse_line(_get_irc_state().copy(), get_line()),
-                      _domain_send)
+    yield next_state(parse_line(_get_irc_state(), get_line()),
+                     _domain_send)
 
 
 # apply_callbacks -> domain_send
@@ -49,13 +62,13 @@ def _apply_callbacks(state, next_state):
     #
     # callbacks are currently applied synchronously
     map(lambda f: f(state.copy()), get_callbacks().itervalues())
-    return next_state(state, _take_line)
+    yield next_state(state, _take_line)
 
 
 # domain_send -> take_line
 def _domain_send(state, next_state):
-    map(partial(_get_domain_socket, state.copy()), get_domain_sockets())
-    return next_state(state, _apply_callbacks)
+    map(partial(_get_domain_socket, state), get_domain_sockets())
+    yield next_state(state, _apply_callbacks)
 
 
 def _get_domain_socket(state, sock_path):

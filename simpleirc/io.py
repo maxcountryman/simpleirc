@@ -71,6 +71,7 @@ def _handle_domain_line(l):
     try:
         l = json.loads(l)
     except ValueError:
+        logging.debug(l, exc_info=True)
         return
 
     sock_path = l.get('register')
@@ -79,7 +80,7 @@ def _handle_domain_line(l):
         get_domain_sockets().add(sock_path)
         return
 
-    for k in l.iterkeys():
+    for k, v in l.iteritems():
         if hasattr(irc, k):
-            if isinstance(k, list):
+            if isinstance(v, list):
                 getattr(irc, k)(*l[k])
