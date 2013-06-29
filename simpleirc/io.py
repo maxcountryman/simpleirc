@@ -38,18 +38,18 @@ def put_line(line):
     return _o.put(line + '\r\n')
 
 
-def read_lines(s, bufsize):
+def read_lines(s, bufsize):  # pragma: no cover
     while True:
         map(lambda l: (logging.info(l), _i.put(l)),
             s.recv(bufsize).split('\r\n')[:-1])
 
 
-def write_lines(s):
+def write_lines(s):  # pragma: no cover
     while True:
         s.send(_o.get(block=True))
 
 
-def domain_listen():
+def domain_listen():  # pragma: no cover
     if os.path.exists(DOMAIN_SOCKET_PATH):
         os.unlink(DOMAIN_SOCKET_PATH)
 

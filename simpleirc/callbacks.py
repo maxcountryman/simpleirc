@@ -37,8 +37,8 @@ _irc_state = _get_irc_state()
 
 
 def _join(state):
-    if state['command'] == 'JOIN' \
-        and state['prefix'].startswith(state['nick']):
+    if state['command'] == 'JOIN' and \
+            state['prefix'].startswith(state['nick']):
         chan = state['crlf']
         _irc_state['channels'].append({chan: []})
 
@@ -58,8 +58,8 @@ def _join(state):
 
 
 def _part(state):
-    if state['command'] == 'PART' \
-        and state['prefix'].startswith(state['nick']):
+    if state['command'] == 'PART' and \
+            state['prefix'].startswith(state['nick']):
         _irc_state['channels'] = filter(lambda c: state['params'] not in c,
                                         _irc_state['channels'])
 
