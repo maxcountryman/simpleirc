@@ -51,12 +51,12 @@ as follows:
 
 ```python
 >>> import json
->>> payload = json.dumps({'register': '/tmp/foo.sock'})' + \r\n
+>>> payload = json.dumps({'register': '/tmp/foo.sock'})' + '\r\n'
 >>> sender.sendto(payload, '/tmp/simpleirc.sock')
 ```
 
 ```python
->>> payload = json.dumps({'join': ['#voxinfinitus']})
+>>> payload = json.dumps({'join': ['#voxinfinitus']}) + '\r\n'
 >>> sender.sendto(payload, '/tmp/simpleirc.sock')
 ```
 
