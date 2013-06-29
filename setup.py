@@ -6,20 +6,15 @@
 
     Links
     `````
-    * `development version
-    <https://github.com/maxcountryman/simpleirc>`_
+    * `development version <https://github.com/maxcountryman/simpleirc>`_
 '''
 
 import os
 import sys
 
-from setuptools import setup
+from simpleirc import __version__
 
-module_path = os.path.join(os.path.dirname(__file__), 'simpleirc/__init__.py')
-version_line = [line for line in open(module_path)
-                if line.startswith('__version_info__')][0]
-
-__version__ = '.'.join(eval(version_line.split('__version_info__ = ')[-1]))
+from setuptools import find_packages, setup
 
 if sys.argv[-1] == 'test':
     status = os.system('make check')
@@ -36,7 +31,7 @@ setup(name='simpleirc',
       long_description=__doc__,
       zip_safe=False,
       platforms='any',
-      py_modules=['simpleirc'],
+      packages=find_packages(),
       classifiers=(
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
