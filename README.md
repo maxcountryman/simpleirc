@@ -29,7 +29,7 @@ Simpleirc may be invoked from the command line like this:
 $ python -m simpleirc.connection "irc.strangeloop.io" 6697 "foo" "foo" "Foo the Bar" 1
 ```
 
-The syntax here is <server> <port> <nick> <user> <realname> <ssl>. This will
+The syntax here is `<server> <port> <nick> <user> <realname> <ssl>`. This will
 initialize a connecton to the IRC server. The package will do simple
 connection maintenance, such as PONGing on PING.
 
