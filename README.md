@@ -26,7 +26,7 @@ $ pip install simpleirc
 Simpleirc may be invoked from the command line like this:
 
 ```sh
-$ python -m simpleirc.connection "irc.strangeloop.io" 6697 "foo" "foo" "Foo the Bar" 1
+$ simpleirc "irc.strangeloop.io" 6697 "foo" "foo" "Foo the Bar" 1
 ```
 
 The syntax here is `<server> <port> <nick> <user> <realname> <ssl>`. This will

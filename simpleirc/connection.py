@@ -68,7 +68,7 @@ def connect(server, nick, user, realname, ssl=False, bufsize=BUFSIZE):
     return _irc_state
 
 
-if __name__ == '__main__':
+def run():
     import sys
 
     if not sys.argv or len(sys.argv) not in (6, 7):
@@ -83,3 +83,7 @@ if __name__ == '__main__':
 
     while True:
         pass
+
+
+if __name__ == '__main__':
+    run()
