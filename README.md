@@ -6,7 +6,7 @@ An IRC connection layer written in Python.
 
 ## Why
 
-Decoupling the IRC connection layer from wahtever application might be using it
+Decoupling the IRC connection layer from whatever application might be using it
 frees up that application to behave however it might like. For instance, an
 application that consumes simpleirc as a layer might be stopped, reloaded, and
 then started again without disrupting the underlying connection. This also
@@ -51,7 +51,7 @@ as follows:
 
 ```python
 >>> import json
->>> payload = json.dumps({'register': '/tmp/foo.sock'})' + '\r\n'
+>>> payload = json.dumps({'register': '/tmp/foo.sock'}) + '\r\n'
 >>> sender.sendto(payload, '/tmp/simpleirc.sock')
 ```
 
