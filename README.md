@@ -1,5 +1,7 @@
 # simpleirc
 
+[![build status](https://secure.travis-ci.org/maxcountryman/simpleirc.png?branch=master)](https://travis-ci.org/#!/maxcountryman/simpleirc)
+
 An IRC connection layer written in Python.
 
 ## Why
