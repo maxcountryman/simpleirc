@@ -1,3 +1,7 @@
 !.gitignore
 !.travis.yml
+
+*.egg*
+
+dist/
 tests_output/
